@@ -9,25 +9,28 @@
     <p class="text-2xl font-bold mb-4">CSV→Bookmarklet</p>
     <p class="mb-4">
       https://www.football-lab.jp/のマッチレポートをCSV(エクセル)に変換するブックマークレットです。
-    <!-- 使い方 -->
+      <!-- 使い方 -->
+    </p>
+
     <p class="mb-4">
       使い方: <br />
       ①ブックマークレットをブックマークバーにドラッグ&ドロップ<br />
       ②
-      <a 
-      href="https://www.football-lab.jp/shim/report"
-      class="text-blue-500 hover:underline"
+      <a
+        href="https://www.football-lab.jp/shim/report"
+        class="text-blue-500 hover:underline"
       >
         https://www.football-lab.jp/[チームURL]/report
       </a>
       のようなマッチレポートページにアクセス<br />
       ③ブックマークに保存されてるブックマークレットをクリック
     </p>
-    
     <a
-      href="javascript:(function()%7Bconst%20selector%20%3D%20'.statsTbl6'%3Bconst%20tables%20%3D%20document.querySelectorAll(selector)%3Bif(tables.length%20%3C%202)%20return%20alert('対象のテーブルが見つかりません。')%3Bconst%20table%20%3D%20tables%5B1%5D%3Blet%20csvContent%20%3D%20'%22%22%2C%22HOME成功率%22%2C%22HOME総数%22%2C%22AWAY%20総数%22%2C%22AWAY%20成功率%22%2C%5Cn'%3Bconst%20extractText%20%3D%20(node)%20%3D%3E%20node.innerText.replace(%2F%22%2Fg%2C%20'%22%22')%3Bconst%20categories%20%3D%20table.querySelectorAll('tr.tr3')%3Bcategories.forEach((cat)%20%3D%3E%20%7Bconst%20categoryName%20%3D%20extractText(cat.querySelector('td'))%3Bconst%20dataRows%20%3D%20cat.nextElementSibling.querySelectorAll('td%3Anot(.dsktp)')%3Bif(dataRows.length%20%3D%3D%3D%200)%20return%3Blet%20rowData%20%3D%20%60%22%24%7BcategoryName%7D%22%2C%60%3BdataRows.forEach((td%2C%20index)%20%3D%3E%20%7BrowData%20%2B%3D%20%60%22%24%7BextractText(td)%7D%22%60%3Bif(index%20%3C%20dataRows.length%20-%201)%20rowData%20%2B%3D%20'%2C'%3B%7D)%3BcsvContent%20%2B%3D%20%60%24%7BrowData%7D%5Cn%60%3B%7D)%3Bconst%20blob%20%3D%20new%20Blob(%5BcsvContent%5D%2C%20%7B%20type%3A%20'text%2Fcsv%3Bcharset%3Dutf-8%3B'%20%7D)%3Bconst%20url%20%3D%20URL.createObjectURL(blob)%3Bconst%20link%20%3D%20document.createElement('a')%3Blink.href%20%3D%20url%3Blink.download%20%3D%20'table_data.csv'%3Bdocument.body.appendChild(link)%3Blink.click()%3Bdocument.body.removeChild(link)%3B%7D)()"
+      href="javascript:(function()%7Bconst selector='.statsTbl6';const tables=document.querySelectorAll(selector);if(tables.length<2)return alert('対象のテーブルが見つかりません。');const table=tables[1];let csvContent='%22%22,%22HOME成功率%22,%22HOME総数%22,%22AWAY総数%22,%22AWAY成功率%22,%5Cn';const extractText=(node)=>node.innerText.replace(/%22/g,'%22%22').replace(/-|(%5C-)/g,' ');const categories=table.querySelectorAll('tr.tr3');categories.forEach((cat)%3D%3E%7Bconst categoryName=extractText(cat.querySelector('td'));const dataRows=cat.nextElementSibling.querySelectorAll('td:not(.dsktp)');if(dataRows.length===0)return;let rowData='%22'+categoryName+'%22,';dataRows.forEach((td,index)%3D%3E%7BrowData+='%22'+extractText(td)+'%22';if(index<dataRows.length-1)rowData+=',';%7D);csvContent+=rowData+'%5Cn';%7D);const blob=new Blob([csvContent],%7Btype:'text/csv;charset=utf-8;'%7D);const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='table_data.csv';document.body.appendChild(link);link.click();document.body.removeChild(link);%7D)()"
     >
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
         ブックマーク欄へドラッグ&ドロップ
       </button>
     </a>
