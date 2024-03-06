@@ -8,9 +8,9 @@ javascript: (() => {
 
   const extractText = (node) => {
     let text = node.innerText.trim().replace(/"/g, '""');
-    text = text.replace(/^-$/, '');
-    text = text.replace(/\(\)/g, '');
-    text = text.replace(/-(?!\d)/g, '');
+    text = text.replace(/(?<=\d)%/g, '％');
+    text = text.replace(/-(?![0-9％])/g, '');
+    text = text.replace(/％/g, '%');
     return text;
   };
 
